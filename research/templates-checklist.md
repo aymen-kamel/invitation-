@@ -42,7 +42,12 @@ then http://localhost:4173/tests/check.html). Every template is loaded in an ifr
 - **Real audio output**: browsers only play sound after a real tap; the harness checks player state.
 - **Gyroscope tilt** on phones (iOS asks for permission; without it the scene uses a gentle idle sway).
 - **open.mp4**: no videos in the pack yet. When `openings/<id>/open.mp4` exists it plays instead of the CSS opening.
-- **YouTube music** with a broken id: not built yet (demos use the built-in synthesised melody).
+- **YouTube music**: 9 templates play a suggested YouTube song through a hidden `youtube-nocookie.com`
+  player that starts on the opening tap (Baby Farha keeps the built-in lullaby). Checked by hand:
+  the player loads, plays after the tap, and a broken id (`?music=https://www.youtube.com/watch?v=XXXXXXXXXXX`)
+  hides the music button silently while the invitation still opens. If a browser refuses to start
+  the sound, a "Touchez pour la musique ♪ / اضغط للموسيقى" pill appears. Try any song with
+  `?music=<YouTube link>`; the 4 suggestions are listed in `SONG_SUGGESTIONS` (templates/registry.js). "Odkhoula Omri" (qnJrE0X_tqE) was dropped: it never starts when embedded. If a song still has not started after the guest taps the pill, the music button is hidden.
 
 ## Known limits of the current visuals
 

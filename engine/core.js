@@ -81,6 +81,9 @@ async function main() {
   applyTheme(tpl);
   const { data, demo } = await loadData(tpl);
   if (demo && data.music?.type === 'synth' && tpl.mood) data.music.mood = tpl.mood;
+  // Demos play the template's suggested YouTube song; ?music=<youtube link> tries any other song.
+  if (demo && tpl.song) data.music = { type: 'youtube', url: tpl.song };
+  if (qs.get('music')) data.music = qs.get('music') === 'none' ? { type: 'none' } : { type: 'youtube', url: qs.get('music') };
   const langs = (data.languages || ['ar', 'fr', 'en']).filter((l) => LANGS[l]);
   let lang = langs.includes(qs.get('lang')) ? qs.get('lang') : (data.defaultLang || langs[0]);
   setLang(lang);
@@ -91,7 +94,25 @@ async function main() {
   const who = isCouple(data) ? data.names.map((n) => makeT(lang).L(n)).join(' & ') : makeT(lang).L(data.honoree);
   document.title = `${who} · Farha`;
 
-  const music = createMusic(data.music);
+  let blocked = false, blockTimer = 0, attempts = 0;
+  let music = createMusic(data.music, {
+    onChange: () => { if (music?.playing) blocked = false; renderControls(); },
+    onBlocked: () => { blocked = true; renderControls(); },
+    onUnavailable: () => { music = null; renderControls(); }, // broken / removed video: hide silently
+  });
+  const musicOn = () => Boolean(music && (music.playing || (music.wanted && !blocked)));
+  const startMusic = () => {
+    if (!music) return;
+    music.start(); renderControls();
+    clearTimeout(blockTimer); attempts++;
+    // if the browser refused to start the sound, offer the "tap for music" pill
+    // after a second failed try (e.g. a video that silently refuses to play when embedded) hide the music
+    blockTimer = setTimeout(() => {
+      if (!music || music.playing) return;
+      if (attempts >= 2 && music.wanted !== undefined) { music.pause(); music = null; } else blocked = true;
+      renderControls();
+    }, 4000);
+  };
   const app = document.getElementById('app');
   const controls = document.getElementById('controls');
 
@@ -101,7 +122,8 @@ async function main() {
     const langBtns = langs.length > 1
       ? `<div class="lang-switch" role="group" aria-label="${t('language')}">${langs.map((l) => `<button type="button" data-lang="${l}" aria-pressed="${l === lang}" lang="${l}">${LANGS[l].label}</button>`).join('')}</div>`
       : '';
-    const mus = music ? `<button type="button" class="music-btn${music.playing ? ' on' : ''}" aria-pressed="${music.playing}" aria-label="${music.playing ? t('musicOff') : t('musicOn')}">${music.playing ? icon.music : icon.mute}<span class="eq" aria-hidden="true"><i></i><i></i><i></i></span></button>` : '';
+    const on = musicOn();
+    const mus = music ? `<div class="music-dock">${on ? '' : `<button type="button" class="music-pill">${t('tapForMusic')}</button>`}<button type="button" class="music-btn${on ? ' on' : ''}" aria-pressed="${on}" aria-label="${on ? t('musicOff') : t('musicOn')}">${on ? icon.music : icon.mute}<span class="eq" aria-hidden="true"><i></i><i></i><i></i></span></button></div>` : '';
     controls.innerHTML = langBtns + mus;
   }
   controls.addEventListener('click', (e) => {
@@ -113,9 +135,9 @@ async function main() {
       scrollTo(0, y * document.body.scrollHeight);
       const u = new URL(location.href); u.searchParams.set('lang', lang); history.replaceState(null, '', u);
     }
-    if (e.target.closest('.music-btn') && music) {
-      music.playing ? music.pause() : music.resume();
-      renderControls();
+    if (e.target.closest('.music-btn, .music-pill') && music) {
+      if (musicOn() && !e.target.closest('.music-pill')) { clearTimeout(blockTimer); music.pause(); renderControls(); }
+      else { blocked = false; startMusic(); }
     }
   });
 
@@ -255,7 +277,7 @@ async function main() {
     tpl, data, t, lang, reduced,
     initials: isCouple(data) ? data.names.map((n) => t.L(n).trim()[0] || '').join('') : (t.L(data.honoree)[0] || ''),
     who,
-    unlock: () => { music?.start(); renderControls(); },
+    unlock: () => startMusic(),
   });
   document.body.classList.remove('gated'); document.body.classList.add('opened');
   stage.classList.add('gone');

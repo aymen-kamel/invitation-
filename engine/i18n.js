@@ -44,6 +44,7 @@ const S = {
   wishRequired: { ar: 'اكتب الاسم والتمنيات', fr: 'Ajoutez votre nom et votre vœu', en: 'Add your name and wish' },
   shareInvite: { ar: 'شارك الدعوة', fr: "Partager l'invitation", en: 'Share the invitation' },
   madeWith: { ar: 'صُنعت بحب مع', fr: 'Fait avec amour par', en: 'Made with love by' },
+  tapForMusic: { ar: 'اضغط للموسيقى ♪', fr: 'Touchez pour la musique ♪', en: 'Tap for music ♪' },
   musicOn: { ar: 'تشغيل الموسيقى', fr: 'Activer la musique', en: 'Play music' },
   musicOff: { ar: 'إيقاف الموسيقى', fr: 'Couper la musique', en: 'Pause music' },
   language: { ar: 'اللغة', fr: 'Langue', en: 'Language' },

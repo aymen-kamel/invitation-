@@ -3,6 +3,15 @@
 
 export const fontsHref = (gf) => `https://fonts.googleapis.com/css2?family=${gf.join('&family=')}&display=swap`;
 
+// Suggested songs (YouTube embeds, never bundled as files). Each client can replace it with their own link.
+// Checked 2026-11-20: all four play when embedded. "Odkhoula Omri" (qnJrE0X_tqE) was dropped: it never starts in an embed.
+export const SONG_SUGGESTIONS = [
+  { id: 'aktY1vejF9Y', title: 'Hussain Al Jassmi – Fostanek Al Abyad' },
+  { id: '7wELp5GGJcI', title: 'Zaffa – Hathihi Fatinati (mix)' },
+  { id: '1odRg-2BfXs', title: 'Bism Khaleq El Hob Nabda (bride entrance)' },
+  { id: 'hzJHoSePZJU', title: 'Hanian Liman Asbahat Min Nasibih (bride entrance)' },
+];
+
 export const STYLE_FAMILIES = {
   floral: { fr: 'Floral', ar: 'زهري', en: 'Floral' },
   mediterranean: { fr: 'Méditerranée', ar: 'متوسطي', en: 'Mediterranean' },
@@ -25,7 +34,7 @@ export const TEMPLATES = [
     id: 'jasmin', name: { fr: 'Jasmin', ar: 'ياسمين', en: 'Jasmine' },
     tagline: { fr: 'Enveloppe scellée d’un mechmoum de jasmin', ar: 'ظرف مختوم بمشموم الياسمين', en: 'An envelope sealed with a jasmine posy' },
     events: ['wedding', 'engagement', 'contract'], style: 'floral', tier: 'prestige', demo: 'wedding',
-    opening: 'envelope', openingOpts: { seal: 'jasmine' }, motif: 'mechmoum', divider: 'jasmine', corner: 'floral', pattern: 'dots', mood: 'sweet',
+    opening: 'envelope', openingOpts: { seal: 'jasmine' }, motif: 'mechmoum', divider: 'jasmine', corner: 'floral', pattern: 'dots', mood: 'sweet', song: 'https://www.youtube.com/watch?v=aktY1vejF9Y',
     photo: { mode: 'seal', focal: [0.52, 0.58], particles: 'petals', colors: ['#ffffff', '#f4f1e2'] },
     palette: {
       bg: '#eef2e8', paper: '#fdfdf8', ink: '#24331f', muted: '#66745e', accent: '#5f7d4e', accent2: '#2f4a2a', line: 'rgba(47,74,42,.16)', 'btn-ink': '#fff', card: 'rgba(255,255,255,.7)',
@@ -40,7 +49,7 @@ export const TEMPLATES = [
     id: 'sidibou', name: { fr: 'Sidi Bou', ar: 'سيدي بو', en: 'Sidi Bou' },
     tagline: { fr: 'Une porte bleue cloutée s’ouvre sur la mer', ar: 'باب أزرق مسمّر ينفتح على البحر', en: 'A studded blue door opens onto the sea' },
     events: ['wedding', 'engagement'], style: 'mediterranean', tier: 'prestige', demo: 'wedding',
-    opening: 'doors', motif: 'arch', divider: 'star', corner: 'line', pattern: 'mashrabiya', mood: 'oud',
+    opening: 'doors', motif: 'arch', divider: 'star', corner: 'line', pattern: 'mashrabiya', mood: 'oud', song: 'https://www.youtube.com/watch?v=7wELp5GGJcI',
     photo: { mode: 'doors', focal: [0.46, 0.55], split: 0.463, particles: 'bougain', colors: ['#c51a78', '#e0479a', '#f06bb0'] },
     palette: {
       bg: '#e6f0f6', paper: '#ffffff', ink: '#12304a', muted: '#557089', accent: '#1f6fb2', accent2: '#0d3f6b', line: 'rgba(13,63,107,.15)', 'btn-ink': '#fff', card: 'rgba(230,240,246,.5)',
@@ -54,7 +63,7 @@ export const TEMPLATES = [
     id: 'henna', name: { fr: 'Nuit du Henné', ar: 'ليلة الحنّة', en: 'Henna Night' },
     tagline: { fr: 'Un mandala de henné se dessine, les rideaux s’ouvrent', ar: 'نقش حنّة يُرسم وتنفتح الستائر', en: 'A henna mandala draws itself, curtains part' },
     events: ['henna', 'outia'], style: 'traditional', tier: 'essentiel', demo: 'henna',
-    opening: 'henna', motif: 'mandala', divider: 'dots', corner: 'arabesque', pattern: 'henna', mood: 'oud',
+    opening: 'henna', motif: 'mandala', divider: 'dots', corner: 'arabesque', pattern: 'henna', mood: 'oud', song: 'https://www.youtube.com/watch?v=hzJHoSePZJU',
     photo: { mode: 'curtains', focal: [0.5, 0.45], particles: 'dust', colors: ['#f3d27a', '#c9a45c'] },
     palette: {
       bg: '#4a0916', paper: '#fbf3ea', ink: '#3b0d14', muted: '#7a5752', accent: '#b8893b', accent2: '#4a0916', line: 'rgba(74,9,22,.16)', 'btn-ink': '#fff', card: 'rgba(255,255,255,.55)',
@@ -67,7 +76,7 @@ export const TEMPLATES = [
     id: 'khomsa', name: { fr: 'Khomsa', ar: 'خمسة', en: 'Khomsa' },
     tagline: { fr: 'Or sur noir, sceau de cire à la khomsa', ar: 'ذهب على أسود، ختم شمع بالخمسة', en: 'Gold on black, a khomsa wax seal' },
     events: ['wedding', 'engagement', 'contract'], style: 'night', tier: 'prestige', demo: 'wedding',
-    opening: 'sealBreak', motif: 'khomsa', divider: 'star', corner: 'arabesque', pattern: 'zellige', mood: 'night',
+    opening: 'sealBreak', motif: 'khomsa', divider: 'star', corner: 'arabesque', pattern: 'zellige', mood: 'night', song: 'https://www.youtube.com/watch?v=1odRg-2BfXs',
     photo: { mode: 'doors', focal: [0.5, 0.46], split: 0.5, particles: 'dust', colors: ['#f3d27a', '#c9a45c'], overlay: 'rgba(13,11,9,.35)' },
     palette: {
       bg: '#0d0b09', paper: '#15120e', ink: '#f1e6cf', muted: '#b7a98c', accent: '#c9a45c', accent2: '#e6c77f', line: 'rgba(201,164,92,.24)', 'btn-ink': '#15120e', card: 'rgba(255,255,255,.035)',
@@ -81,7 +90,7 @@ export const TEMPLATES = [
     id: 'kairouan', name: { fr: 'Kairouan', ar: 'القيروان', en: 'Kairouan' },
     tagline: { fr: 'Un tapis de Kairouan se déroule', ar: 'زربية قيروانية تنبسط أمامكم', en: 'A Kairouan rug unrolls' },
     events: ['wedding', 'engagement', 'contract'], style: 'traditional', tier: 'signature', demo: 'wedding',
-    opening: 'carpet', motif: 'star8', divider: 'star', corner: 'kilim', pattern: 'kilim', mood: 'oud',
+    opening: 'carpet', motif: 'star8', divider: 'star', corner: 'kilim', pattern: 'kilim', mood: 'oud', song: 'https://www.youtube.com/watch?v=7wELp5GGJcI',
     photo: { mode: 'zoom', focal: [0.7, 0.6], particles: 'sand', colors: ['#ffe3a8', '#fff3d6'] },
     palette: {
       bg: '#efe1cc', paper: '#fbf4e8', ink: '#3d2216', muted: '#7f5f49', accent: '#a9472a', accent2: '#5e2418', line: 'rgba(94,36,24,.18)', 'btn-ink': '#fff', card: 'rgba(255,255,255,.5)',
@@ -94,7 +103,7 @@ export const TEMPLATES = [
     id: 'medina', name: { fr: 'Nuits de la Médina', ar: 'ليالي المدينة', en: 'Medina Nights' },
     tagline: { fr: 'Ciel étoilé, lanternes qui s’allument une à une', ar: 'سماء مرصّعة بالنجوم وفوانيس تضيء', en: 'Starry sky, lanterns lighting one by one' },
     events: ['wedding', 'henna', 'engagement'], style: 'night', tier: 'signature', demo: 'wedding',
-    opening: 'lanterns', motif: 'lantern', divider: 'star', corner: 'arabesque', pattern: 'stars', mood: 'night',
+    opening: 'lanterns', motif: 'lantern', divider: 'star', corner: 'arabesque', pattern: 'stars', mood: 'night', song: 'https://www.youtube.com/watch?v=1odRg-2BfXs',
     photo: { mode: 'zoom', focal: [0.62, 0.62], particles: 'dust', colors: ['#ffc65c', '#ffe3a8'], overlay: 'rgba(11,21,48,.25)' },
     palette: {
       bg: '#0f1a33', paper: '#13203f', ink: '#f3ead8', muted: '#aab3c8', accent: '#e2b659', accent2: '#f0cf86', line: 'rgba(226,182,89,.22)', 'btn-ink': '#0f1a33', card: 'rgba(255,255,255,.04)',
@@ -108,7 +117,7 @@ export const TEMPLATES = [
     id: 'djerba', name: { fr: 'Djerba', ar: 'جربة', en: 'Djerba' },
     tagline: { fr: 'L’aube sur la mer à travers une arche de terre cuite', ar: 'فجر على البحر من خلال قوس طيني', en: 'Dawn over the sea through a terracotta arch' },
     events: ['wedding', 'engagement'], style: 'mediterranean', tier: 'signature', demo: 'wedding',
-    opening: 'sunrise', motif: 'sun', divider: 'dots', corner: 'line', pattern: 'waves', mood: 'sweet',
+    opening: 'sunrise', motif: 'sun', divider: 'dots', corner: 'line', pattern: 'waves', mood: 'sweet', song: 'https://www.youtube.com/watch?v=7wELp5GGJcI',
     photo: { mode: 'zoom', focal: [0.6, 0.52], particles: 'sand', colors: ['#fff1d0', '#ffffff'] },
     palette: {
       bg: '#f4e7d3', paper: '#fffaf1', ink: '#4a2a1a', muted: '#86644d', accent: '#b9572f', accent2: '#723019', line: 'rgba(114,48,25,.16)', 'btn-ink': '#fff', card: 'rgba(255,255,255,.55)',
@@ -122,7 +131,7 @@ export const TEMPLATES = [
     id: 'blush', name: { fr: 'Blush Minimal', ar: 'وردي بسيط', en: 'Blush Minimal' },
     tagline: { fr: 'Typographie moderne, carte pliée qui s’ouvre', ar: 'خطوط عصرية وبطاقة مطوية تنفتح', en: 'Modern type, a folded card that opens' },
     events: ['wedding', 'engagement', 'contract', 'birthday'], style: 'minimal', tier: 'signature', demo: 'engagement',
-    opening: 'fold', motif: 'none', divider: 'dots', corner: '', pattern: 'dots', mood: 'sweet',
+    opening: 'fold', motif: 'none', divider: 'dots', corner: '', pattern: 'dots', mood: 'sweet', song: 'https://www.youtube.com/watch?v=aktY1vejF9Y',
     photo: { mode: 'seal', focal: [0.5, 0.57], particles: 'petals', colors: ['#f7d6d4', '#ffffff'] },
     palette: {
       bg: '#f6e8e5', paper: '#fffaf8', ink: '#3b2a2c', muted: '#86706f', accent: '#b9686d', accent2: '#4f3236', line: 'rgba(79,50,54,.14)', 'btn-ink': '#fff', card: 'rgba(246,232,229,.45)',
@@ -135,7 +144,7 @@ export const TEMPLATES = [
     id: 'monogram', name: { fr: 'Monogramme Ivoire', ar: 'مونوغرام عاجي', en: 'Monogram Ivory' },
     tagline: { fr: 'Lettre pliée en trois, sceau de cire à vos initiales', ar: 'رسالة مطوية بختم شمع بالأحرف الأولى', en: 'A tri-fold letter with your initials in wax' },
     events: ['wedding', 'engagement', 'contract'], style: 'classic', tier: 'prestige', demo: 'wedding',
-    opening: 'letter', motif: 'monogram', divider: 'diamond', corner: 'line', pattern: 'dots', mood: 'sweet',
+    opening: 'letter', motif: 'monogram', divider: 'diamond', corner: 'line', pattern: 'dots', mood: 'sweet', song: 'https://www.youtube.com/watch?v=aktY1vejF9Y',
     photo: { mode: 'seal', focal: [0.5, 0.48], particles: 'dust', colors: ['#e8cd88', '#fff3c9'] },
     palette: {
       bg: '#ece5d6', paper: '#fffdf7', ink: '#2e2a24', muted: '#776d61', accent: '#a8864e', accent2: '#4a0916', line: 'rgba(46,42,36,.14)', 'btn-ink': '#fff', card: 'rgba(236,229,214,.35)',

@@ -176,3 +176,9 @@ body.gated #controls .music-btn { display: none; }
   body.opened .sec { opacity: 1; transform: none; }
 }
 .hm-mechmoum { --petal-line: color-mix(in oklab, var(--accent) 55%, transparent); }
+
+.music-dock { margin-top: auto; display: flex; align-items: center; gap: 8px; }
+.music-dock .music-btn { margin-top: 0; }
+.music-pill { height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line); background: color-mix(in oklab, var(--paper) 90%, transparent); backdrop-filter: blur(8px); color: var(--accent2); font: 600 .85rem/1 var(--font-body); cursor: pointer; box-shadow: 0 8px 22px -10px rgba(0, 0, 0, .4); animation: op-pulse 2.2s ease-in-out infinite; white-space: nowrap; }
+:root[dir='rtl'] .music-pill { font-family: var(--font-ar); font-size: .95rem; }
+body.gated #controls .music-dock { display: none; }

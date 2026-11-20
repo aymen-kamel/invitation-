@@ -1,50 +1,75 @@
 // Background music: uploaded file, YouTube link, or (demos) an original melody synthesised in the browser.
 // Browsers only allow audio after a user gesture, so start() must be called from the "open" tap.
 
-export function createMusic(cfg) {
+export function createMusic(cfg, hooks = {}) {
   if (!cfg || cfg.type === 'none') return null;
-  if (cfg.type === 'file' && cfg.url) return fileMusic(cfg.url);
-  if (cfg.type === 'youtube' && cfg.url) return youtubeMusic(cfg.url);
+  if (cfg.type === 'file' && cfg.url) return fileMusic(cfg.url, hooks);
+  if (cfg.type === 'youtube' && cfg.url) return youtubeMusic(cfg.url, hooks);
   return synthMusic(cfg.mood || 'oud');
 }
 
-function fileMusic(url) {
+function fileMusic(url, hooks) {
   const a = new Audio(url);
   a.loop = true; a.preload = 'none'; a.volume = 0.7;
-  return { start: () => a.play().catch(() => {}), pause: () => a.pause(), resume: () => a.play().catch(() => {}), get playing() { return !a.paused; } };
+  a.addEventListener('error', () => hooks.onUnavailable?.());
+  const play = () => a.play().then(() => hooks.onChange?.(), () => hooks.onBlocked?.());
+  return { start: play, pause: () => { a.pause(); hooks.onChange?.(); }, resume: play, get playing() { return !a.paused; } };
 }
 
-function youtubeId(url) {
-  const m = String(url).match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{11})/);
+export function youtubeId(url) {
+  const m = String(url).match(/(?:youtu\.be\/|[?&]v=|embed\/|shorts\/|live\/)([\w-]{11})/) || String(url).match(/^([\w-]{11})$/);
   return m ? m[1] : null;
 }
 
-function youtubeMusic(url) {
+/**
+ * Hidden YouTube player (privacy-enhanced youtube-nocookie.com host), looped.
+ * Loaded on page load so it is ready when the guest taps "open" (the tap is the user gesture
+ * browsers require for sound). If the video is removed / not embeddable, onUnavailable fires
+ * and the music button disappears silently.
+ */
+function youtubeMusic(url, hooks) {
   const id = youtubeId(url);
-  if (!id) return synthMusic('oud');
-  let player = null, ready = false, wantPlay = false, playing = false;
+  if (!id) { queueMicrotask(() => hooks.onUnavailable?.()); return null; }
+  let player = null, ready = false, wantPlay = false, playing = false, dead = false;
   const host = document.createElement('div');
-  host.style.cssText = 'position:fixed;width:1px;height:1px;left:-10px;bottom:0;opacity:0;pointer-events:none';
+  host.setAttribute('aria-hidden', 'true');
+  host.style.cssText = 'position:fixed;width:2px;height:2px;left:0;bottom:0;opacity:.01;pointer-events:none;z-index:-1';
   host.innerHTML = '<div id="yt-music"></div>';
   document.body.appendChild(host);
+  const fail = () => { if (dead) return; dead = true; playing = false; host.remove(); hooks.onUnavailable?.(); };
   const boot = () => {
     player = new window.YT.Player('yt-music', {
-      videoId: id, width: 1, height: 1,
-      playerVars: { autoplay: 0, controls: 0, loop: 1, playlist: id, playsinline: 1 },
-      events: { onReady: () => { ready = true; if (wantPlay) { player.playVideo(); playing = true; } } },
+      host: 'https://www.youtube-nocookie.com',
+      videoId: id, width: 2, height: 2,
+      playerVars: { autoplay: 0, controls: 0, disablekb: 1, fs: 0, loop: 1, playlist: id, playsinline: 1, rel: 0, iv_load_policy: 3, enablejsapi: 1, origin: location.origin },
+      events: {
+        onReady: () => { ready = true; player.setVolume(80); if (wantPlay) player.playVideo(); },
+        onStateChange: (e) => {
+          const P = window.YT.PlayerState;
+          if (e.data === P.PLAYING) { playing = true; hooks.onChange?.(); }
+          else if (e.data === P.PAUSED) { playing = false; hooks.onChange?.(); }
+          else if (e.data === P.ENDED) player.playVideo();
+        },
+        // 2 bad id, 5 html5 error, 100 removed/private, 101 & 150 embedding disabled
+        onError: fail,
+      },
     });
   };
   if (window.YT?.Player) boot();
   else {
     const prev = window.onYouTubeIframeAPIReady;
     window.onYouTubeIframeAPIReady = () => { prev?.(); boot(); };
-    const s = document.createElement('script'); s.src = 'https://www.youtube.com/iframe_api'; s.async = true; document.head.appendChild(s);
+    const sc = document.createElement('script'); sc.src = 'https://www.youtube.com/iframe_api'; sc.async = true;
+    sc.onerror = fail;
+    document.head.appendChild(sc);
   }
   return {
-    start() { wantPlay = true; if (ready) { player.playVideo(); playing = true; } },
-    pause() { wantPlay = false; if (ready) player.pauseVideo(); playing = false; },
+    start() { if (dead) return; wantPlay = true; if (ready) player.playVideo(); },
+    pause() { wantPlay = false; if (ready) player.pauseVideo(); playing = false; hooks.onChange?.(); },
     resume() { this.start(); },
     get playing() { return playing; },
+    get wanted() { return wantPlay; },
+    get dead() { return dead; },
   };
 }
 
