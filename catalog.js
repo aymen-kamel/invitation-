@@ -28,6 +28,14 @@ chips('tier', Object.entries(TIERS).map(([k, v]) => [k, `${v.fr} · ${v.price}`]
 
 /** Thumbnail: a miniature invitation drawn with the template's own palette, fonts and motif. */
 function thumb(t) {
+  if (t.photo) {
+    const sample = SAMPLE_NAMES[t.demo] || 'Yasmine & Karim';
+    return `<div class="thumb thumb-photo" style="--accent:${t.palette.accent};--font-script:${esc(t.fonts.script)}">
+      <img src="/openings/${t.id}/closed.webp" alt="" loading="lazy" decoding="async" width="1080" height="1920">
+      <img class="th-seal-img" src="/openings/${t.id}/seal.webp" alt="" loading="lazy" decoding="async" width="120" height="120">
+      <p class="th-ov-names">${esc(sample)}</p>
+    </div>`;
+  }
   const vars = Object.entries(t.palette).map(([k, v]) => `--${k}:${v}`).join(';');
   const fonts = `--font-display:${t.fonts.display};--font-script:${t.fonts.script}`;
   const sample = SAMPLE_NAMES[t.demo] || 'Yasmine & Karim';

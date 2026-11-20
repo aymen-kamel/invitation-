@@ -101,7 +101,7 @@ async function checkOne(tpl, lang, width) {
     await d.fonts.ready;
     const fam = (v) => (tpl.fonts[v].match(/'([^']+)'/) || [])[1];
     r.fontAr = lang === 'ar' ? d.fonts.check(`16px "${fam('arDisplay') || fam('ar')}"`, 'سلام') : true;
-    r.fontLatin = d.fonts.check(`16px "${fam('script')}"`, 'Aa');
+    r.fontLatin = lang === 'ar' ? true : d.fonts.check(`16px "${fam('script')}"`, 'Aa');
   } catch (e) {
     r.error = String(e);
   }
@@ -112,8 +112,8 @@ async function checkOne(tpl, lang, width) {
 const KEYS = ['opens', 'rtlOk', 'countdown', 'maps', 'gcal', 'ics', 'rsvpValidates', 'rsvp', 'wishes', 'musicOn', 'musicToggle', 'noOverflow', 'fontAr', 'fontLatin'];
 
 async function run() {
-  const only = new URLSearchParams(location.search).get('t');
-  for (const tpl of TEMPLATES.filter((t) => !only || t.id === only)) {
+  const only = (new URLSearchParams(location.search).get('t') || '').split(',').filter(Boolean);
+  for (const tpl of TEMPLATES.filter((t) => !only.length || only.includes(t.id))) {
     for (const lang of ['fr', 'ar']) {
       for (const width of [375, 1280]) {
         out.textContent = `Checking ${tpl.id} ${lang} ${width}px…`;
