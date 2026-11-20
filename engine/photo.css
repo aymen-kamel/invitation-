@@ -17,9 +17,10 @@
 @keyframes ph-kenburns { from { transform: scale(1); } to { transform: scale(1.09) translate(-1%, -1%); } }
 /* split halves: each shows exactly its half of the same photo */
 .ph-half { width: 50%; overflow: hidden; backface-visibility: hidden; transition: transform 1.7s cubic-bezier(.55, 0, .2, 1) .15s, filter 1.7s ease .15s; }
-.ph-l { left: 0; transform-origin: left center; }
-.ph-r { right: 0; left: auto; transform-origin: right center; }
-.ph-half-img { position: absolute; top: 0; bottom: 0; width: 200%; background: center / cover no-repeat; }
+.ph-l { left: 0; width: var(--split, 50%); transform-origin: left center; }
+.ph-r { right: 0; left: auto; width: calc(100% - var(--split, 50%)); transform-origin: right center; }
+.ph-half-img { position: absolute; top: 0; bottom: 0; background: center / cover no-repeat; }
+.ph-l .ph-half-img { width: var(--l-img, 200%); } .ph-r .ph-half-img { width: var(--r-img, 200%); }
 .ph-l .ph-half-img { left: 0; } .ph-r .ph-half-img { right: 0; }
 .ph-edge { position: absolute; top: 0; bottom: 0; width: 18px; }
 .ph-l .ph-edge { right: 0; background: linear-gradient(90deg, transparent, rgba(0, 0, 0, .35)); }

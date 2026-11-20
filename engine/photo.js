@@ -33,6 +33,10 @@ export async function photoOpening(stage, ctx) {
   stage.style.setProperty('--fx', `${fx * 100}%`);
   stage.style.setProperty('--fy', `${fy * 100}%`);
   stage.style.setProperty('--closed', `url('${img}')`);
+  const split = ph.split || 0.5; // where the photo divides (door seam)
+  stage.style.setProperty('--split', `${split * 100}%`);
+  stage.style.setProperty('--l-img', `${100 / split}%`);
+  stage.style.setProperty('--r-img', `${100 / (1 - split)}%`);
   stage.innerHTML = `
     <div class="op-scene ph-scene" role="button" tabindex="0" aria-label="${esc(t('tapToOpen'))}">
       <div class="ph-behind" style="background-image:url('${base}/bg.webp')">
