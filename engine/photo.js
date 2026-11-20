@@ -4,9 +4,10 @@
 // 'curtains' (photo halves slide apart), 'zoom' (walk through the scene).
 // If openings/<id>/open.mp4 exists it plays instead, then fades into the invitation.
 import { esc } from './sections.js';
+import { SITE } from './site.js';
 import { particles, tilt } from './particles.js';
 
-export const assetBase = (tpl) => `/openings/${tpl.id}`;
+export const assetBase = (tpl) => `${SITE}openings/${tpl.id}`;
 
 function hasVideo(src) {
   return new Promise((resolve) => {

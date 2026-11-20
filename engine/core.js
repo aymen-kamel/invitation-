@@ -9,6 +9,7 @@ import { buildICS, downloadICS, googleCalUrl } from './calendar.js';
 import { icon, patternFill } from './ornaments.js';
 import { photoOpening, assetBase } from './photo.js';
 import { particles } from './particles.js';
+import { SITE } from './site.js';
 
 const qs = new URLSearchParams(location.search);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches || qs.has('nomotion');
@@ -17,7 +18,7 @@ async function loadData(tpl) {
   const src = qs.get('data');
   // Orders are JSON files served from this site (relative paths only).
   if (src && /^[\w\-/]+\.json$/.test(src)) {
-    const r = await fetch(src.startsWith('/') ? src : `/${src}`);
+    const r = await fetch(`${SITE}${src.replace(/^\/+/, '')}`);
     if (r.ok) return { data: await r.json(), demo: false };
   }
   const key = qs.get('demo') || tpl.demo;
@@ -38,7 +39,7 @@ function applyTheme(tpl) {
   document.head.appendChild(link);
   document.querySelector('meta[name="theme-color"]')?.setAttribute('content', tpl.palette.bg);
   if (tpl.css) {
-    const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = `/templates/${tpl.id}.css`; document.head.appendChild(l);
+    const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = `${SITE}templates/${tpl.id}.css`; document.head.appendChild(l);
   }
   const backdrop = document.querySelector('.backdrop');
   if (tpl.photo && !qs.has('nophoto')) {

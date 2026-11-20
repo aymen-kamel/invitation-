@@ -25,7 +25,7 @@ async function waitFor(fn, timeout = 6000) {
 
 async function checkOne(tpl, lang, width) {
   const r = { template: tpl.id, lang, width };
-  const f = await frame(width, width < 600 ? 812 : 900, `/i/?t=${tpl.id}&lang=${lang}&qa=${Math.random()}`);
+  const f = await frame(width, width < 600 ? 812 : 900, `../i/?t=${tpl.id}&lang=${lang}&qa=${Math.random()}`);
   const w = f.contentWindow, d = f.contentDocument;
   try { w.localStorage.clear(); } catch { /* ignore */ }
   try {

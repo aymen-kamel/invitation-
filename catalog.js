@@ -1,6 +1,8 @@
 import { TEMPLATES, STYLE_FAMILIES, TIERS } from './templates/registry.js';
 import { EVENT_KINDS } from './engine/i18n.js';
 
+const SITE = new URL('./', import.meta.url).pathname; // works at / and under /invitation-/
+
 // ── Shop settings ──────────────────────────────────────────────────────────
 // WhatsApp number that receives orders (international format, digits only).
 const WHATSAPP = '21692891770';
@@ -19,7 +21,7 @@ const frame = document.getElementById('phone-frame');
 document.querySelector('.demo-pick')?.addEventListener('click', (e) => {
   const b = e.target.closest('[data-demo]'); if (!b) return;
   document.querySelectorAll('.demo-pick button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
-  frame.src = `/i/?t=${b.dataset.demo}&music=none`;
+  frame.src = `${SITE}i/?t=${b.dataset.demo}&music=none`;
 });
 
 // ── Catalog ──
@@ -37,14 +39,14 @@ chips('tier', Object.entries(TIERS).map(([k, v]) => [k, `${v.fr} · ${v.price}`]
 
 function card(t) {
   const demo = DEMO_FOR[state.event] && t.events.includes(state.event) ? DEMO_FOR[state.event] : t.demo;
-  const demoUrl = `/i/?t=${t.id}${demo !== t.demo ? `&demo=${demo}` : ''}`;
+  const demoUrl = `${SITE}i/?t=${t.id}${demo !== t.demo ? `&demo=${demo}` : ''}`;
   const tier = TIERS[t.tier];
   const names = SAMPLE_NAMES[demo] || 'Ranim & Aymen';
   const order = wa(`Bonjour Mémora, je souhaite commander l'invitation « ${t.name.fr} » (${tier.fr}).`);
   return `<article class="card">
     <a class="thumb" href="${demoUrl}" target="_blank" rel="noopener" aria-label="Ouvrir la démo ${esc(t.name.fr)}">
-      <img class="th-photo" src="/openings/${t.id}/closed.webp" alt="" loading="lazy" decoding="async" width="1080" height="1920">
-      <img class="th-seal" src="/openings/${t.id}/seal.webp" alt="" loading="lazy" decoding="async" width="120" height="120">
+      <img class="th-photo" src="${SITE}openings/${t.id}/closed.webp" alt="" loading="lazy" decoding="async" width="1080" height="1920">
+      <img class="th-seal" src="${SITE}openings/${t.id}/seal.webp" alt="" loading="lazy" decoding="async" width="120" height="120">
       <span class="th-names" style="--font-script:${esc(t.fonts.script)}">${esc(names)}</span>
       <span class="th-play">Démo ↗</span>
     </a>

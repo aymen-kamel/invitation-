@@ -1,6 +1,7 @@
 // Shared invitation sections. Each returns an HTML string; behaviour is attached in core.js (bind*).
 import { eventStart, eventEnd, fmtDate, fmtTime, mapsUrl } from './calendar.js';
 import { divider, corner, heroMotif, icon, jasmine, waxSeal } from './ornaments.js';
+import { SITE } from './site.js';
 
 export const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
@@ -36,7 +37,7 @@ function hero(ctx) {
     follow = `<p class="invite-line">${esc(t.L(data.inviteLine) || t('celebrate'))}</p>`;
   }
   const initials = isCouple(data) ? data.names.map((n) => t.L(n).trim()[0] || '').join('') : (t.L(data.honoree).trim()[0] || '');
-  const motif = tpl.photo ? `<img src="/openings/${tpl.id}/seal.webp" alt="" width="132" height="132" decoding="async">`
+  const motif = tpl.photo ? `<img src="${SITE}openings/${tpl.id}/seal.webp" alt="" width="132" height="132" decoding="async">`
     : tpl.motif === 'none' ? ''
     : tpl.motif === 'monogram' ? waxSeal('initials', { cls: 'motif', text: esc(initials) })
       : heroMotif(tpl.motif, { cls: 'motif' });
@@ -189,7 +190,7 @@ function footer(ctx) {
   const { t } = ctx;
   return `<footer class="sec footer" id="footer">
     <button type="button" class="btn btn-ghost share-btn">${icon.share}<span>${t('shareInvite')}</span></button>
-    <p class="made">${t('madeWith')} <a href="/" target="_blank" rel="noopener">Mémora · ميمورا</a></p>
+    <p class="made">${t('madeWith')} <a href="${SITE}" target="_blank" rel="noopener">Mémora · ميمورا</a></p>
   </footer>`;
 }
 
