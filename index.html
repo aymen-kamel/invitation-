@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#4a0916">
+  <title>Modèles d'invitation · Farha</title>
+  <meta name="description" content="Invitations digitales tunisiennes : mariage, henné, katb el kteb, fiançailles, naissance, tahara, anniversaire. Démos en arabe, français et anglais.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@400;500;600&family=Amiri&display=swap">
+  <link rel="stylesheet" href="/catalog.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="https://farha-bay.vercel.app/">Farha <span lang="ar">فرحة</span></a>
+    <p class="eyebrow">Collection 2026</p>
+    <h1>Nos modèles d'invitation</h1>
+    <p class="lead">Dix créations originales à l'identité tunisienne. Un seul lien : ouverture animée, musique, programme, lieux, RSVP et vœux — en arabe, français et anglais.</p>
+  </header>
+
+  <form class="filters" aria-label="Filtrer les modèles">
+    <fieldset>
+      <legend>Événement</legend>
+      <div class="chips" data-filter="event"></div>
+    </fieldset>
+    <fieldset>
+      <legend>Style</legend>
+      <div class="chips" data-filter="style"></div>
+    </fieldset>
+    <fieldset>
+      <legend>Formule</legend>
+      <div class="chips" data-filter="tier"></div>
+    </fieldset>
+  </form>
+
+  <p class="count" aria-live="polite"></p>
+  <main class="grid" id="grid"></main>
+
+  <footer class="foot">
+    <p>Toutes les illustrations sont dessinées par Farha. Polices Google Fonts (licence libre).</p>
+  </footer>
+  <script type="module" src="/catalog.js"></script>
+</body>
+</html>

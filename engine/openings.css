@@ -53,9 +53,9 @@
 .hn-curtain::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0, 0, 0, .25), transparent 30%, rgba(255, 255, 255, .06) 60%, rgba(0, 0, 0, .2)); }
 .hn-center { position: relative; z-index: 2; display: grid; justify-items: center; gap: 14px; transition: transform 1.1s ease, opacity .9s ease; }
 .hn-mandala { width: min(70vw, 300px); color: var(--accent); }
-.hn-mandala .mandala-lines > * { stroke-dasharray: 1; stroke-dashoffset: 1; animation: hn-draw 2.6s ease forwards; }
-.hn-mandala .mandala-lines > *:nth-child(n+10) { animation-delay: .5s; } .hn-mandala .mandala-lines > *:nth-child(n+30) { animation-delay: 1s; } .hn-mandala .mandala-lines > *:nth-child(n+50) { animation-delay: 1.4s; }
-.hn-mandala .mandala-dots { opacity: 0; animation: fade-in 1s ease 2.2s forwards; }
+.hn-mandala .mandala-lines > * { stroke-dasharray: 1; stroke-dashoffset: 1; animation: hn-draw 1.6s ease forwards; }
+.hn-mandala .mandala-lines > *:nth-child(n+10) { animation-delay: .3s; } .hn-mandala .mandala-lines > *:nth-child(n+30) { animation-delay: .6s; } .hn-mandala .mandala-lines > *:nth-child(n+50) { animation-delay: .9s; }
+.hn-mandala .mandala-dots { opacity: 0; animation: fade-in .8s ease 1.4s forwards; }
 .hn-title { margin: 0; font: 400 2rem var(--font-script); color: var(--accent); }
 :root[dir='rtl'] .hn-title { font-family: var(--font-ar-display); }
 @keyframes hn-draw { to { stroke-dashoffset: 0; } }
@@ -99,7 +99,7 @@
 @keyframes cp-away { to { transform: translateY(-20px) scale(1.06); opacity: 0; } }
 
 /* ───── 6 lanterns ───── */
-.op-lanterns { --op-bg: var(--night); --op-ink: var(--paper); --op-chip: var(--accent); --op-chip-ink: var(--night); }
+.op-lanterns { --op-bg: var(--night); --op-ink: var(--ink); --op-chip: var(--accent); --op-chip-ink: var(--night); }
 .ln-sky { position: absolute; inset: 0; --pat-bg: transparent; --pat-a: rgba(255, 255, 255, .7); --pat-b: var(--accent); animation: twinkle 4s ease-in-out infinite; }
 @keyframes twinkle { 50% { opacity: .55; } }
 .ln-moon { position: absolute; top: 9%; inset-inline-end: 14%; width: 54px; color: var(--accent); filter: drop-shadow(0 0 14px color-mix(in oklab, var(--accent) 70%, transparent)); }
@@ -143,7 +143,7 @@
 .fd-backface { background: color-mix(in oklab, var(--accent) 60%, var(--paper)); transform: rotateY(180deg); }
 .fd-mono { font: 400 clamp(2.4rem, 12vw, 3.4rem)/1 var(--font-display); letter-spacing: .08em; }
 .fd-line { width: 48px; height: 1px; background: currentColor; }
-.fd-small { font-size: .78rem; letter-spacing: .26em; text-transform: uppercase; }
+.fd-small { max-width: 80%; font-size: .72rem; line-height: 1.6; letter-spacing: .2em; text-transform: uppercase; text-align: center; }
 :root[dir='rtl'] .fd-small { letter-spacing: 0; font-size: 1rem; }
 .op-fold .op-hint .op-tap { visibility: hidden; }
 .is-open .fd-cover { transform: rotateY(-170deg); }
