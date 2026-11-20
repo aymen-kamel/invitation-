@@ -2,7 +2,7 @@
 
 Usage:  python scripts/import-assets.py <source-folder>
 Source folder holds one sub-folder per template (jasmin/, sidi-bou/, ...) with
-closed.webp, bg.webp, seal.png and optionally open.mp4.
+closed, bg and seal images (.jpg, .png or .webp) and optionally open.mp4.
 
 - closed.webp / bg.webp: re-encoded to WebP q80 at max 1080x1920.
 - seal.png: background colour (sampled from the corners) keyed out to transparency,
@@ -72,21 +72,30 @@ def key_out_background(img: Image.Image, tol: int = 34) -> Image.Image:
     return out
 
 
+def find(folder: Path, name: str):
+    """Accept closed.jpg / closed.png / closed.webp (Canva downloads are jpg or png)."""
+    for ext in ('webp', 'png', 'jpg', 'jpeg'):
+        p = folder / f'{name}.{ext}'
+        if p.exists():
+            return p
+    return None
+
+
 def main(src: Path) -> None:
     for folder in sorted(p for p in src.iterdir() if p.is_dir()):
         tid = ALIASES.get(folder.name, folder.name)
         dest = ROOT / tid
         dest.mkdir(parents=True, exist_ok=True)
         for name in ('closed', 'bg'):
-            f = folder / f'{name}.webp'
-            if f.exists():
+            f = find(folder, name)
+            if f:
                 im = Image.open(f).convert('RGB')
                 im.thumbnail((1080, 1920))
                 if ENHANCE:
                     im = enhance(im)
                 im.save(dest / f'{name}.webp', 'WEBP', quality=80, method=6)
-        seal = folder / 'seal.png'
-        if seal.exists():
+        seal = find(folder, 'seal')
+        if seal:
             im = Image.open(seal).convert('RGB')
             im.thumbnail((512, 512))
             if ENHANCE:
