@@ -9,7 +9,7 @@ const wishes = [
 export const SAMPLES = {
   wedding: {
     eventType: 'wedding', languages: ['fr', 'ar', 'en'], defaultLang: 'fr',
-    names: [{ fr: 'Yasmine', ar: 'ياسمين', en: 'Yasmine' }, { fr: 'Karim', ar: 'كريم', en: 'Karim' }],
+    names: [{ fr: 'Ranim', ar: 'رنيم', en: 'Ranim' }, { fr: 'Aymen', ar: 'أيمن', en: 'Aymen' }],
     families: [{ fr: 'Famille Ben Salah', ar: 'عائلة بن صالح', en: 'The Ben Salah family' }, { fr: 'Famille Trabelsi', ar: 'عائلة الطرابلسي', en: 'The Trabelsi family' }],
     message: { fr: 'Trois soirées pour célébrer notre union, entourés de ceux que nous aimons.', ar: 'ثلاث سهرات نحتفل فيها بارتباطنا مع من نحب.', en: 'Three evenings to celebrate our union, surrounded by the people we love.' },
     mainEvent: 2,
@@ -36,7 +36,7 @@ export const SAMPLES = {
 
   engagement: {
     eventType: 'engagement', languages: ['fr', 'ar', 'en'], defaultLang: 'fr',
-    names: [{ fr: 'Ines', ar: 'إيناس', en: 'Ines' }, { fr: 'Mehdi', ar: 'مهدي', en: 'Mehdi' }],
+    names: [{ fr: 'Ranim', ar: 'رنيم', en: 'Ranim' }, { fr: 'Aymen', ar: 'أيمن', en: 'Aymen' }],
     families: [{ fr: 'Famille Gharbi', ar: 'عائلة الغربي', en: 'The Gharbi family' }, { fr: 'Famille Jaziri', ar: 'عائلة الجزيري', en: 'The Jaziri family' }],
     inviteLine: { fr: 'ont la joie de vous convier à leurs fiançailles', ar: 'يسعدهم دعوتكم إلى حفل خطوبتهما', en: 'are delighted to invite you to their engagement' },
     events: [{ kind: 'engagement', offsetDays: 30, time: '18:00', durationH: 4, venue: { fr: 'Villa Les Oliviers', ar: 'فيلا الزياتين', en: 'Villa Les Oliviers' }, address: { fr: 'La Marsa, Tunis', ar: 'المرسى، تونس', en: 'La Marsa, Tunis' }, city: { fr: 'La Marsa', ar: 'المرسى', en: 'La Marsa' } }],
@@ -49,7 +49,7 @@ export const SAMPLES = {
 
   henna: {
     eventType: 'henna', languages: ['ar', 'fr', 'en'], defaultLang: 'ar',
-    names: [{ fr: 'Salma', ar: 'سلمى', en: 'Salma' }, { fr: 'Aymen', ar: 'أيمن', en: 'Aymen' }],
+    names: [{ fr: 'Ranim', ar: 'رنيم', en: 'Ranim' }, { fr: 'Aymen', ar: 'أيمن', en: 'Aymen' }],
     families: [{ fr: 'Famille Haddad', ar: 'عائلة الحدّاد', en: 'The Haddad family' }, { fr: 'Famille Mansouri', ar: 'عائلة المنصوري', en: 'The Mansouri family' }],
     inviteLine: { fr: 'vous invitent à la nuit du henné', ar: 'يتشرّفون بدعوتكم لسهرة الحنّة', en: 'invite you to the henna night' },
     mainEvent: 1,

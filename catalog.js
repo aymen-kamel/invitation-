@@ -6,7 +6,7 @@ import { heroMotif, patternFill, waxSeal, doorLeaf, lantern } from './engine/orn
 const ORDER_URL = (id) => `https://farha-bay.vercel.app/?modele=${encodeURIComponent(id)}#themes`;
 // Which demo dataset best shows a template for a given event filter.
 const DEMO_FOR = { wedding: 'wedding', engagement: 'engagement', contract: 'wedding', henna: 'henna', outia: 'henna', birth: 'baby', babyshower: 'baby', tahara: 'tahara', birthday: 'birthday' };
-const SAMPLE_NAMES = { wedding: 'Yasmine & Karim', engagement: 'Ines & Mehdi', henna: 'Salma & Aymen', baby: 'Lina', birthday: 'Adam', tahara: 'Youssef' };
+const SAMPLE_NAMES = { wedding: 'Ranim & Aymen', engagement: 'Ranim & Aymen', henna: 'Ranim & Aymen', baby: 'Lina', birthday: 'Adam', tahara: 'Youssef' };
 
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
@@ -29,7 +29,7 @@ chips('tier', Object.entries(TIERS).map(([k, v]) => [k, `${v.fr} · ${v.price}`]
 /** Thumbnail: a miniature invitation drawn with the template's own palette, fonts and motif. */
 function thumb(t) {
   if (t.photo) {
-    const sample = SAMPLE_NAMES[t.demo] || 'Yasmine & Karim';
+    const sample = SAMPLE_NAMES[t.demo] || 'Ranim & Aymen';
     return `<div class="thumb thumb-photo" style="--accent:${t.palette.accent};--font-script:${esc(t.fonts.script)}">
       <img src="/openings/${t.id}/closed.webp" alt="" loading="lazy" decoding="async" width="1080" height="1920">
       <img class="th-seal-img" src="/openings/${t.id}/seal.webp" alt="" loading="lazy" decoding="async" width="120" height="120">
@@ -38,7 +38,7 @@ function thumb(t) {
   }
   const vars = Object.entries(t.palette).map(([k, v]) => `--${k}:${v}`).join(';');
   const fonts = `--font-display:${t.fonts.display};--font-script:${t.fonts.script}`;
-  const sample = SAMPLE_NAMES[t.demo] || 'Yasmine & Karim';
+  const sample = SAMPLE_NAMES[t.demo] || 'Ranim & Aymen';
   const art = {
     doors: `<div class="th-doors">${doorLeaf('l')}${doorLeaf('r')}</div>`,
     lanterns: `<div class="th-lanterns">${lantern({})}${lantern({})}</div>`,
