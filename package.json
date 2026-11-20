@@ -1,0 +1,10 @@
+{
+  "name": "farha-templates",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Farha invitation engine and original template library (static, no build step).",
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/serve.mjs 4173"
+  }
+}
