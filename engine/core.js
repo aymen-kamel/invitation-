@@ -7,6 +7,8 @@ import { OPENINGS } from './openings.js';
 import { createMusic } from './music.js';
 import { buildICS, downloadICS, googleCalUrl } from './calendar.js';
 import { icon, patternFill } from './ornaments.js';
+import { photoOpening, assetBase } from './photo.js';
+import { particles } from './particles.js';
 
 const qs = new URLSearchParams(location.search);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches || qs.has('nomotion');
@@ -38,7 +40,25 @@ function applyTheme(tpl) {
   if (tpl.css) {
     const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = `/templates/${tpl.id}.css`; document.head.appendChild(l);
   }
-  document.querySelector('.backdrop').innerHTML = patternFill(tpl.pattern || 'dots');
+  const backdrop = document.querySelector('.backdrop');
+  if (tpl.photo && !qs.has('nophoto')) {
+    const base = assetBase(tpl);
+    root.classList.add('has-photo');
+    if (tpl.photo.overlay) root.style.setProperty('--bg-overlay', tpl.photo.overlay);
+    for (const [href, as] of [[`${base}/closed.webp`, 'image'], [`${base}/bg.webp`, 'image']]) {
+      const l = document.createElement('link'); l.rel = 'preload'; l.as = as; l.href = href; document.head.appendChild(l);
+    }
+    backdrop.innerHTML = `<div class="photo-bg" style="background-image:url('${base}/bg.webp')"></div>`;
+    // gentle parallax on scroll
+    let ticking = false;
+    addEventListener('scroll', () => {
+      if (ticking || reduced) return; ticking = true;
+      requestAnimationFrame(() => { backdrop.firstElementChild?.style.setProperty('--sy', String(Math.round(scrollY * 0.12))); ticking = false; });
+    }, { passive: true });
+  } else {
+    tpl.photo = null;
+    backdrop.innerHTML = patternFill(tpl.pattern || 'dots');
+  }
 }
 
 function setLang(lang) {
@@ -220,11 +240,18 @@ async function main() {
   // ── opening ──
   const stage = document.getElementById('opening');
   const skip = qs.has('open') || !OPENINGS[tpl.opening];
-  if (skip) { stage.remove(); document.body.classList.add('opened'); renderControls(); return; }
+  const ambient = () => {
+    if (!tpl.photo || reduced) return;
+    const layer = document.createElement('div');
+    layer.className = 'fx-layer'; layer.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(layer);
+    particles(layer, tpl.photo.particles || 'dust', tpl.photo.colors || ['#fff'], { density: 0.45 });
+  };
+  if (skip) { stage.remove(); document.body.classList.add('opened'); renderControls(); ambient(); return; }
   document.body.classList.add('gated');
   renderControls();
   const t = makeT(lang);
-  await OPENINGS[tpl.opening](stage, {
+  await (tpl.photo ? photoOpening : OPENINGS[tpl.opening])(stage, {
     tpl, data, t, lang, reduced,
     initials: isCouple(data) ? data.names.map((n) => t.L(n).trim()[0] || '').join('') : (t.L(data.honoree)[0] || ''),
     who,
@@ -233,6 +260,7 @@ async function main() {
   document.body.classList.remove('gated'); document.body.classList.add('opened');
   stage.classList.add('gone');
   setTimeout(() => stage.remove(), reduced ? 0 : 700);
+  ambient();
   app.querySelector('h1')?.setAttribute('tabindex', '-1');
   app.querySelector('h1')?.focus({ preventScroll: true });
 }

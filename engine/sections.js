@@ -36,11 +36,12 @@ function hero(ctx) {
     follow = `<p class="invite-line">${esc(t.L(data.inviteLine) || t('celebrate'))}</p>`;
   }
   const initials = isCouple(data) ? data.names.map((n) => t.L(n).trim()[0] || '').join('') : (t.L(data.honoree).trim()[0] || '');
-  const motif = tpl.motif === 'none' ? ''
+  const motif = tpl.photo ? `<img src="/openings/${tpl.id}/seal.webp" alt="" width="132" height="132" decoding="async">`
+    : tpl.motif === 'none' ? ''
     : tpl.motif === 'monogram' ? waxSeal('initials', { cls: 'motif', text: esc(initials) })
       : heroMotif(tpl.motif, { cls: 'motif' });
   return `<section class="sec hero" id="hero">
-    ${motif ? `<div class="hero-motif hm-${tpl.motif}">${motif}</div>` : ''}
+    ${motif ? `<div class="${tpl.photo ? 'hero-seal' : `hero-motif hm-${tpl.motif}`}">${motif}</div>` : ''}
     ${lead}${names}${follow}
     ${divider(tpl.divider || 'diamond')}
     <p class="hero-date"><time datetime="${start.toISOString()}">${esc(dateStr)}</time></p>
