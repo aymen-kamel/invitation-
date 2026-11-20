@@ -3,43 +3,224 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#4a0916">
-  <title>Modèles d'invitation · Farha</title>
-  <meta name="description" content="Invitations digitales tunisiennes : mariage, henné, katb el kteb, fiançailles, naissance, tahara, anniversaire. Démos en arabe, français et anglais.">
+  <meta name="theme-color" content="#541f32">
+  <title>Mémora Invitations · Invitations digitales tunisiennes</title>
+  <meta name="description" content="Invitations digitales animées pour mariage, henné, katb el kteb, fiançailles, naissance, tahara et anniversaire. Un seul lien : ouverture 3D, musique, programme, lieux, RSVP. Arabe, français, anglais.">
+  <meta property="og:title" content="Mémora Invitations">
+  <meta property="og:description" content="Une seule invitation. Toute l'émotion. Ouverture 3D, musique, lieux, RSVP — en arabe, français et anglais.">
+  <meta property="og:image" content="/openings/khomsa/closed.webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@400;500;600&family=Amiri&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&family=Amiri:wght@400;700&display=swap">
   <link rel="stylesheet" href="/catalog.css">
+  <link rel="preload" as="image" href="/openings/khomsa/closed.webp">
 </head>
 <body>
-  <header class="top">
-    <a class="brand" href="https://farha-bay.vercel.app/">Farha <span lang="ar">فرحة</span></a>
-    <p class="eyebrow">Collection 2026</p>
-    <h1>Nos modèles d'invitation</h1>
-    <p class="lead">Dix créations originales à l'identité tunisienne. Un seul lien : ouverture animée, musique, programme, lieux, RSVP et vœux — en arabe, français et anglais.</p>
+  <a class="skip" href="#modeles">Aller aux modèles</a>
+
+  <header class="nav" id="top">
+    <div class="wrap nav-in">
+      <a class="logo" href="#top" aria-label="Mémora Invitations, accueil">
+        <span class="logo-word">MÉMORA</span><span class="logo-sub">Invitations</span>
+      </a>
+      <nav class="nav-links" aria-label="Navigation principale">
+        <a href="#modeles">Modèles</a>
+        <a href="#experience">L'expérience</a>
+        <a href="#etapes">Comment ça marche</a>
+        <a href="#tarifs">Tarifs</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a class="btn btn-wine nav-cta" href="#modeles">Créer mon invitation</a>
+    </div>
   </header>
 
-  <form class="filters" aria-label="Filtrer les modèles">
-    <fieldset>
-      <legend>Événement</legend>
-      <div class="chips" data-filter="event"></div>
-    </fieldset>
-    <fieldset>
-      <legend>Style</legend>
-      <div class="chips" data-filter="style"></div>
-    </fieldset>
-    <fieldset>
-      <legend>Formule</legend>
-      <div class="chips" data-filter="tier"></div>
-    </fieldset>
-  </form>
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap hero-in">
+        <div class="hero-copy">
+          <p class="eyebrow">Invitations digitales · Conçues en Tunisie</p>
+          <h1>Une seule invitation.<br><em>Toute l'émotion.</em></h1>
+          <p class="lead">Vos invités reçoivent un lien. Ils ouvrent une enveloppe, une porte de Sidi Bou Saïd ou un sceau à la khomsa — puis découvrent musique, compte à rebours, programme, lieux et confirmation de présence. En arabe, français et anglais.</p>
+          <div class="hero-ctas">
+            <a class="btn btn-wine btn-lg" href="#modeles">Voir les modèles</a>
+            <a class="btn btn-ghost btn-lg" href="/i/?t=khomsa" target="_blank" rel="noopener">Ouvrir une démo ↗</a>
+          </div>
+          <ul class="proof" aria-label="Points forts">
+            <li><strong>10</strong> créations originales</li>
+            <li><strong>3</strong> langues dans un lien</li>
+            <li><strong>dès 24 DT</strong> sans abonnement</li>
+          </ul>
+        </div>
+        <div class="hero-demo">
+          <div class="phone" aria-label="Démo interactive">
+            <div class="phone-notch" aria-hidden="true"></div>
+            <iframe id="phone-frame" title="Démo d'invitation Mémora" src="/i/?t=khomsa&music=none" loading="eager"></iframe>
+          </div>
+          <div class="demo-pick" role="group" aria-label="Changer de modèle dans la démo">
+            <button type="button" data-demo="khomsa" aria-pressed="true">Khomsa</button>
+            <button type="button" data-demo="sidibou" aria-pressed="false">Sidi Bou</button>
+            <button type="button" data-demo="henna" aria-pressed="false">Henné</button>
+            <button type="button" data-demo="jasmin" aria-pressed="false">Jasmin</button>
+          </div>
+          <p class="demo-hint">Touchez l'écran du téléphone pour ouvrir l'invitation</p>
+        </div>
+      </div>
+    </section>
 
-  <p class="count" aria-live="polite"></p>
-  <main class="grid" id="grid"></main>
+    <!-- OCCASIONS -->
+    <section class="occasions" aria-label="Occasions">
+      <div class="wrap">
+        <ul class="occ-list">
+          <li><a href="?event=wedding#modeles"><span lang="ar">العرس</span>Mariage</a></li>
+          <li><a href="?event=henna#modeles"><span lang="ar">الحنّة</span>Nuit du henné</a></li>
+          <li><a href="?event=contract#modeles"><span lang="ar">كتب الكتاب</span>Katb el kteb</a></li>
+          <li><a href="?event=engagement#modeles"><span lang="ar">الخطوبة</span>Fiançailles</a></li>
+          <li><a href="?event=birth#modeles"><span lang="ar">الولادة</span>Naissance</a></li>
+          <li><a href="?event=tahara#modeles"><span lang="ar">الطهارة</span>Tahara</a></li>
+          <li><a href="?event=birthday#modeles"><span lang="ar">عيد الميلاد</span>Anniversaire</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CATALOG -->
+    <section class="sec" id="modeles">
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="eyebrow">La collection</p>
+          <h2>Dix créations, une identité tunisienne</h2>
+          <p class="sec-lead">Chaque modèle a sa propre ouverture animée, ses visuels et sa palette. Touchez une carte pour ouvrir la démo complète.</p>
+        </header>
+        <form class="filters" aria-label="Filtrer les modèles">
+          <fieldset><legend>Événement</legend><div class="chips" data-filter="event"></div></fieldset>
+          <fieldset><legend>Style</legend><div class="chips" data-filter="style"></div></fieldset>
+          <fieldset><legend>Formule</legend><div class="chips" data-filter="tier"></div></fieldset>
+        </form>
+        <p class="count" aria-live="polite"></p>
+        <div class="grid" id="grid"></div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="sec sec-cream" id="experience">
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="eyebrow">L'expérience invité</p>
+          <h2>Tout ce que vos invités doivent savoir, dans un seul lien</h2>
+        </header>
+        <ul class="features">
+          <li><span class="f-ico" aria-hidden="true">✦</span><h3>Ouverture en 3D</h3><p>Portes qui s'ouvrent, rideaux qui s'écartent, sceau de cire qui se brise — l'image suit les mouvements du téléphone.</p></li>
+          <li><span class="f-ico" aria-hidden="true">♪</span><h3>Votre musique</h3><p>Collez un lien YouTube : la chanson démarre dès l'ouverture, avec un bouton pour couper le son.</p></li>
+          <li><span class="f-ico" aria-hidden="true">◷</span><h3>Compte à rebours</h3><p>Jours, heures, minutes et secondes jusqu'au grand jour, toujours à jour.</p></li>
+          <li><span class="f-ico" aria-hidden="true">☰</span><h3>Plusieurs soirées</h3><p>Henné, katb el kteb et mariage dans la même invitation, chacun avec son lieu et son heure.</p></li>
+          <li><span class="f-ico" aria-hidden="true">⌖</span><h3>Maps & agenda</h3><p>Un bouton pour l'itinéraire Google Maps, un autre pour ajouter la date au calendrier (iPhone et Android).</p></li>
+          <li><span class="f-ico" aria-hidden="true">✓</span><h3>Confirmation de présence</h3><p>Vos invités répondent oui ou non et indiquent le nombre de personnes, en quelques secondes.</p></li>
+          <li><span class="f-ico" aria-hidden="true">❦</span><h3>Mur de vœux</h3><p>Chacun laisse un mot doux que tout le monde peut lire.</p></li>
+          <li><span class="f-ico" aria-hidden="true">ع</span><h3>Arabe · Français · English</h3><p>Vos invités choisissent leur langue dans l'invitation, avec une vraie mise en page de droite à gauche.</p></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- STEPS -->
+    <section class="sec" id="etapes">
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="eyebrow">Comment ça marche</p>
+          <h2>Votre lien prêt en trois étapes</h2>
+        </header>
+        <ol class="steps">
+          <li><span class="step-n">01</span><h3>Choisissez un modèle</h3><p>Parcourez la collection et ouvrez les démos sur votre téléphone.</p></li>
+          <li><span class="step-n">02</span><h3>Envoyez vos informations</h3><p>Noms, dates, lieux, photos, code vestimentaire et lien de votre chanson — par WhatsApp, en deux minutes.</p></li>
+          <li><span class="step-n">03</span><h3>Partagez votre lien</h3><p>Vous recevez votre invitation personnalisée, prête à envoyer sur WhatsApp, Instagram ou par SMS.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="sec sec-cream" id="tarifs">
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="eyebrow">Tarifs</p>
+          <h2>Un prix fixe, sans abonnement</h2>
+        </header>
+        <div class="tiers">
+          <article class="tier">
+            <h3>Essentiel</h3><p class="price"><span>24</span> DT</p>
+            <p class="tier-for">Naissance, tahara, anniversaire, nuit du henné</p>
+            <ul><li>Ouverture animée</li><li>Musique & compte à rebours</li><li>Lieu, Maps & agenda</li><li>Confirmation de présence</li><li>3 langues</li></ul>
+            <a class="btn btn-ghost" href="?tier=essentiel#modeles">Voir les modèles</a>
+          </article>
+          <article class="tier tier-featured">
+            <p class="badge">Le plus choisi</p>
+            <h3>Signature</h3><p class="price"><span>56</span> DT</p>
+            <p class="tier-for">Fiançailles et mariages</p>
+            <ul><li>Tout l'Essentiel</li><li>Plusieurs soirées dans un lien</li><li>Photos & histoire du couple</li><li>Code vestimentaire & palette</li><li>Mur de vœux</li></ul>
+            <a class="btn btn-wine" href="?tier=signature#modeles">Voir les modèles</a>
+          </article>
+          <article class="tier">
+            <h3>Prestige</h3><p class="price"><span>86</span> DT</p>
+            <p class="tier-for">Nos créations les plus luxueuses</p>
+            <ul><li>Tout le Signature</li><li>Ouvertures 3D premium</li><li>Visuels haute définition</li><li>Sceaux & visuels exclusifs</li><li>Accompagnement WhatsApp</li></ul>
+            <a class="btn btn-ghost" href="?tier=prestige#modeles">Voir les modèles</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CROSS-SELL -->
+    <section class="sec keepsake">
+      <div class="wrap keepsake-in">
+        <img src="/openings/monogram/closed.webp" alt="" width="1080" height="1920" loading="lazy" decoding="async">
+        <div>
+          <p class="eyebrow">Après la fête</p>
+          <h2>Gardez le souvenir avec Mémora</h2>
+          <p>Transformez la vidéo et les photos de votre mariage en carte Mémora : un objet élégant qui ouvre votre souvenir d'un simple toucher de téléphone, sans application.</p>
+          <a class="btn btn-wine" data-wa="Bonjour Mémora, je voudrais une invitation digitale et une carte souvenir Mémora." href="#">Demander le pack invitation + souvenir</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="sec" id="faq">
+      <div class="wrap narrow">
+        <header class="sec-head">
+          <p class="eyebrow">Questions fréquentes</p>
+          <h2>Tout ce que vous voulez savoir</h2>
+        </header>
+        <div class="faq">
+          <details><summary>Mes invités doivent-ils installer une application ?</summary><p>Non. L'invitation s'ouvre dans le navigateur de n'importe quel téléphone, à partir d'un simple lien.</p></details>
+          <details><summary>Puis-je choisir ma propre chanson ?</summary><p>Oui, envoyez-nous le lien YouTube de votre chanson. Elle démarre quand l'invité ouvre l'invitation.</p></details>
+          <details><summary>Peut-on mettre le henné, le katb el kteb et le mariage dans la même invitation ?</summary><p>Oui. Le programme affiche chaque soirée avec sa date, son heure, son lieu et ses boutons Maps et agenda.</p></details>
+          <details><summary>L'invitation est-elle en arabe ?</summary><p>Elle est en arabe, en français et en anglais. L'invité change de langue en un geste, avec une mise en page de droite à gauche en arabe.</p></details>
+          <details><summary>Combien de temps pour recevoir mon lien ?</summary><p>Envoyez vos informations sur WhatsApp ; nous vous confirmons le délai au moment de la commande.</p></details>
+          <details><summary>Puis-je modifier l'invitation après l'avoir reçue ?</summary><p>Oui, écrivez-nous sur WhatsApp pour toute correction de texte, d'heure ou de lieu.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="final">
+      <div class="wrap final-in">
+        <h2>Prêts à inviter ?</h2>
+        <p>Choisissez votre modèle, nous nous occupons du reste.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-light btn-lg" href="#modeles">Choisir un modèle</a>
+          <a class="btn btn-outline-light btn-lg" data-wa="Bonjour Mémora, je voudrais créer une invitation digitale." href="#">Écrire sur WhatsApp</a>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer class="foot">
-    <p>Toutes les illustrations sont dessinées par Farha. Polices Google Fonts (licence libre).</p>
+    <div class="wrap foot-in">
+      <div><span class="logo-word">MÉMORA</span><span class="logo-sub">Invitations</span><p>Invitations digitales et souvenirs, conçus en Tunisie.</p></div>
+      <p class="small">Toutes les illustrations sont créées pour Mémora. Polices Google Fonts (licence libre). Musique : liens YouTube fournis par les clients.</p>
+    </div>
   </footer>
+
+  <a class="wa-float" data-wa="Bonjour Mémora, j'ai une question sur les invitations digitales." href="#" aria-label="Écrire sur WhatsApp">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3a.5.5 0 0 0 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.4.8 3.2.6a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3Z"/></svg>
+  </a>
   <script type="module" src="/catalog.js"></script>
 </body>
 </html>

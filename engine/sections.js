@@ -189,7 +189,7 @@ function footer(ctx) {
   const { t } = ctx;
   return `<footer class="sec footer" id="footer">
     <button type="button" class="btn btn-ghost share-btn">${icon.share}<span>${t('shareInvite')}</span></button>
-    <p class="made">${t('madeWith')} <a href="https://farha-bay.vercel.app/" target="_blank" rel="noopener">Farha · فرحة</a></p>
+    <p class="made">${t('madeWith')} <a href="/" target="_blank" rel="noopener">Mémora · ميمورا</a></p>
   </footer>`;
 }
 

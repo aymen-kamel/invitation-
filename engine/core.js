@@ -92,7 +92,7 @@ async function main() {
   const ctx = () => ({ tpl, data, t: makeT(lang), lang, now, demo });
 
   const who = isCouple(data) ? data.names.map((n) => makeT(lang).L(n)).join(' & ') : makeT(lang).L(data.honoree);
-  document.title = `${who} · Farha`;
+  document.title = `${who} · Mémora`;
 
   let blocked = false, blockTimer = 0, attempts = 0;
   let music = createMusic(data.music, {
